@@ -53,7 +53,7 @@ func isExtensionMatch(filename string, extList []string) bool {
 
 func getFileList(searchPath string) ([]string, error) {
 	var fileInfoList []string
-	var supportExt = []string{".dll", ".exe", ".sys"}
+	var supportExt = []string{".dll", ".exe", ".ocx", ".sys", ".png", ".bmp", ".ico", ".ini", ".rc", ".json", ".html"}
 
 	err := filepath.Walk(searchPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -64,6 +64,8 @@ func getFileList(searchPath string) ([]string, error) {
 			version, err := getFileVersion(path)
 			if err == nil {
 				fileInfoList = append(fileInfoList, fmt.Sprintf("%s\t%s\t%s\t%d", info.Name(), version, filepath.Dir(path), info.Size()))
+			} else {
+				fileInfoList = append(fileInfoList, fmt.Sprintf("%s\t%s\t%s\t%d", info.Name(), "none", filepath.Dir(path), info.Size()))
 			}
 		}
 		return nil
@@ -88,7 +90,7 @@ func saveToCSV(fileInfoList []string, filePath string) error {
 	defer writer.Flush()
 
 	// Write header
-	writer.Write([]string{"File Name", "Version", "Directory"})
+	writer.Write([]string{"File Name", "Version", "Directory", "byte size"})
 
 	// Write data
 	for _, fileInfo := range fileInfoList {
