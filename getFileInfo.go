@@ -56,10 +56,6 @@ func getFileList(searchPath string) ([]string, error) {
 	var supportExt = []string{".dll", ".exe", ".ocx", ".sys", ".png", ".bmp", ".ico", ".ini", ".rc", ".json", ".html"}
 
 	err := filepath.Walk(searchPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-
 		if !info.IsDir() && isExtensionMatch(path, supportExt) {
 			version, err := getFileVersion(path)
 			if err == nil {
@@ -68,11 +64,12 @@ func getFileList(searchPath string) ([]string, error) {
 				fileInfoList = append(fileInfoList, fmt.Sprintf("%s\t%s\t%s\t%d", info.Name(), "none", filepath.Dir(path), info.Size()))
 			}
 		}
+
 		return nil
 	})
 
 	if err != nil {
-		log.Fatalf("Error walking the path %v: %v", searchPath, err)
+		log.Fatalf("[Error] walking the path %v: %v", searchPath, err)
 	}
 
 	return fileInfoList, nil
