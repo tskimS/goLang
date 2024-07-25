@@ -15,6 +15,7 @@ func saveModuleInfo() {
 	pathList := []string{
 		`c:\windows\softcamp`,
 		// `\\tfsbuild.softcamp.co.kr\TFSBuild_new\Package\Product\DS_vs2019\InstallSheild`,
+		`\\tfsbuild.softcamp.co.kr\TFSBuild_new\2024\SCUtility_vs2019\SCUtility_vs2019`,
 		`\\tfsbuild.softcamp.co.kr\TFSBuild_new\Package\Product\DS_vs2019\InstallSheild\00.SDS_Common`,
 		`\\tfsbuild.softcamp.co.kr\TFSBuild_new\Package\Product\DS_vs2019\InstallSheild\10.SC_Add`,
 		`\\tfsbuild.softcamp.co.kr\TFSBuild_new\Package\Product\DS_vs2019\InstallSheild\40.DSDateSetKeySetup`,
